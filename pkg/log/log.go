@@ -16,17 +16,17 @@ func SetLogger(l *zerolog.Logger) {
 
 // F prints debug log.
 func F(f string, v ...any) {
-	logger.Debug().Msgf(f, v...)
+	logger.Info().Msgf(f, v...)
 }
 
 // Print prints log.
 func Print(v ...any) {
-	logger.Info().Msg(fmt.Sprint(v...))
+	logger.Warn().Msg(fmt.Sprint(v...))
 }
 
 // Printf prints log.
 func Printf(f string, v ...any) {
-	logger.Info().Msgf(f, v...)
+	logger.Warn().Msgf(f, v...)
 }
 
 // Fatal log and exit.
