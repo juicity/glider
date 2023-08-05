@@ -16,7 +16,7 @@ func SetLogger(l *zerolog.Logger) {
 
 // F prints debug log.
 func F(f string, v ...any) {
-	logger.Warn().Msg(fmt.Sprintf(f, v...))
+	logger.Debug().Msgf(f, v...)
 }
 
 // Print prints log.
