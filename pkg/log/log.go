@@ -2,40 +2,39 @@ package log
 
 import (
 	"fmt"
-	stdlog "log"
+
+	"github.com/rs/zerolog"
 )
 
-var enable = false
+var (
+	logger *zerolog.Logger
+)
 
-// Set sets the logger's verbose mode and output flags.
-func Set(verbose bool, flag int) {
-	enable = verbose
-	stdlog.SetFlags(flag)
+func SetLogger(l *zerolog.Logger) {
+	logger = l
 }
 
 // F prints debug log.
 func F(f string, v ...any) {
-	if enable {
-		stdlog.Output(2, fmt.Sprintf(f, v...))
-	}
+	logger.Warn().Msg(fmt.Sprintf(f, v...))
 }
 
 // Print prints log.
 func Print(v ...any) {
-	stdlog.Print(v...)
+	logger.Info().Msg(fmt.Sprint(v...))
 }
 
 // Printf prints log.
 func Printf(f string, v ...any) {
-	stdlog.Printf(f, v...)
+	logger.Info().Msgf(f, v...)
 }
 
 // Fatal log and exit.
 func Fatal(v ...any) {
-	stdlog.Fatal(v...)
+	logger.Fatal().Msg(fmt.Sprint(v...))
 }
 
 // Fatalf log and exit.
 func Fatalf(f string, v ...any) {
-	stdlog.Fatalf(f, v...)
+	logger.Fatal().Msgf(f, v...)
 }
